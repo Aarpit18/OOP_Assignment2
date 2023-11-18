@@ -10,6 +10,27 @@ class Laboratory:
     def addReagent(self, reagent, amount):
         pass
 
+class Potion:
+    def __init__(self, name, stat, boost):
+        self.__name = name
+        self.__stat = stat
+        self.__boost = boost
+
+    def calculateBoost(self):
+        pass
+
+    def getName(self):
+        return self.__name
+    
+    def getStat(self):
+        return self.__stat
+    
+    def getBoost(self):
+        return self.__boost
+    
+    def setBoost(self, boost):
+        self.__boost = boost
+
 class Alchemist:
     def __init__(self):
         self.__attack = 0
