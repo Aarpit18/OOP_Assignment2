@@ -81,10 +81,14 @@ class Reagent:
 class Herb(Reagent):
     def __init__(self, name, potency, grimy):
         super().__init__(name, potency)
-        self.__grmiy = grimy
+        self.__grimy = grimy
 
     def refine(self):
-        pass
+        if self.__grimy == True:
+            print(f"Refining {self.__name}")
+            self.setPotency(self.getPotency()*2.5)
+            self.__grmiy = False
+            print(f"{self.getName()} is no longer grimy and Potency is multiplied by 2.5")
 
     def getGrimy(self):
         return self.__grmiy
@@ -98,7 +102,14 @@ class Catalyst(Reagent):
         self.__quality = quality
 
     def refine(self):
-        pass
+        if self.__quality < 8.9:
+            print(f"Refining {self.__name}")
+            self.__quality += 1.0
+            print(f"Quality increased to {self.__quality} ")
+        elif self.__quality >= 8.9:
+            print(f"Refining {self.__name}")
+            self.__quality = 10
+            print(f"Quality set to 10. It cannot be refined further.")
 
     def getQuality(self):
         return self.__quality
