@@ -60,6 +60,23 @@ class ExtremePotion(Potion):
     
     def getPotion(self):
         return self.__potion
+    
+class Reagent:
+    def __init__(self, name, potency):
+        self.__name = name
+        self.__potency = potency
+
+    def refine(self):
+        pass
+
+    def getName(self):
+        return self.__name
+    
+    def getPotency(self):
+        return self.__potency
+    
+    def setPotency(self, potency):
+        self.__potency = potency
 
 class Alchemist:
     def __init__(self):
