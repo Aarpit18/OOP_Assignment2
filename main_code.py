@@ -1,5 +1,15 @@
 class Laboratory:
-    
+    def __init__(self):
+        self.__potions = []
+        self.__herbs = []
+        self.__catalysts = []
+
+    def mixPotion(self, name, type, stat, primaryIngredient, secondaryIngredient):
+        pass
+
+    def addReagent(self, reagent, amount):
+        pass
+
 class Alchemist:
     def __init__(self):
         self.__attack = 0
