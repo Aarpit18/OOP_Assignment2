@@ -31,6 +31,21 @@ class Potion:
     def setBoost(self, boost):
         self.__boost = boost
 
+class SuperPotion(Potion):
+    def __init__(self, name, stat, boost, herb, catalyst):
+        super().__init__(name, stat, boost)
+        self.__herb = herb
+        self.__catalyst = catalyst
+
+    def calculateBoost(self):
+        pass
+
+    def getHerb(self):
+        return self.__herb
+    
+    def getCatalyst(self):
+        return self.__catalyst
+
 class Alchemist:
     def __init__(self):
         self.__attack = 0
