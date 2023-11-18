@@ -1,3 +1,5 @@
+class Laboratory:
+    
 class Alchemist:
     def __init__(self):
         self.__attack = 0
