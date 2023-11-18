@@ -7,4 +7,22 @@ class Alchemist:
         self.__range = 0
         self.__necromancy = 0
         self.__laboratory = Laboratory()
-        self.recipes: []
+        self.__recipes: []
+
+    def getLaboratory(self):
+        return self.__laboratory
+    
+    def getRecipes(self):
+        return self.__recipes
+    
+    def mixPotion(self, recipe):
+        pass
+
+    def drinkPotion(self, potion):
+        pass
+
+    def collectReagent(self, reagent, amount):
+        pass
+
+    def refineReagent(self):
+        pass
