@@ -45,6 +45,21 @@ class SuperPotion(Potion):
     
     def getCatalyst(self):
         return self.__catalyst
+    
+class ExtremePotion(Potion):
+    def __init__(self, name, stat, boost, reagent, potion):
+        super().__init__(name, stat, boost)
+        self.__reagent = reagent
+        self.__potion = potion
+
+    def calculateBoost(self):
+        pass
+
+    def getReagent(self):
+        return self.__reagent
+    
+    def getPotion(self):
+        return self.__potion
 
 class Alchemist:
     def __init__(self):
