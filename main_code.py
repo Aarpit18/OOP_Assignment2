@@ -92,6 +92,17 @@ class Herb(Reagent):
     def setGrimy(self, grimy):
         self.__grmiy = grimy
 
+class Catalyst(Reagent):
+    def __init__(self, name, potency, quality):
+        super().__init__(name, potency)
+        self.__quality = quality
+
+    def refine(self):
+        pass
+
+    def getQuality(self):
+        return self.__quality
+    
 class Alchemist:
     def __init__(self):
         self.__attack = 0
