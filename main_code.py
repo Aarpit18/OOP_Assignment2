@@ -8,7 +8,11 @@ class Laboratory:
         pass
 
     def addReagent(self, reagent, amount):
-        pass
+        for _ in range(amount):
+            if isinstance (reagent, Herb):
+                self.__herbs.append(reagent)
+            elif isinstance (reagent, Catalyst):
+                self.__catalysts.append(reagent)
 
 class Potion:
     def __init__(self, name, stat, boost):
