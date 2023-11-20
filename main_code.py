@@ -38,7 +38,8 @@ class SuperPotion(Potion):
         self.__catalyst = catalyst
 
     def calculateBoost(self):
-        pass
+        boost_calculation = (self.__herb.getPotency() + (self.__catalyst.getPotency() * self.__catalyst.getQuality()) * 1.5)
+        return round(boost_calculation, 2)
 
     def getHerb(self):
         return self.__herb
@@ -53,7 +54,8 @@ class ExtremePotion(Potion):
         self.__potion = potion
 
     def calculateBoost(self):
-        pass
+        boost_calculation = ((self.__reagent.getPotency() * (self.__catalyst.getBoost()) * 3.0))
+        return round(boost_calculation, 2)
 
     def getReagent(self):
         return self.__reagent
@@ -87,8 +89,8 @@ class Herb(Reagent):
         if self.__grimy == True:
             print(f"Refining {self.__name}")
             self.setPotency(self.getPotency()*2.5)
-            self.__grmiy = False
-            print(f"{self.getName()} is no longer grimy and Potency is multiplied by 2.5")
+            self.__grimy = False
+            print(f"{self.getName()} is no longer grimy and Potency is multiplied by 2.5.")
 
     def getGrimy(self):
         return self.__grmiy
