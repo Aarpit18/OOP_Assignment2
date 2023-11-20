@@ -5,7 +5,18 @@ class Laboratory:
         self.__catalysts = []
 
     def mixPotion(self, name, type, stat, primaryIngredient, secondaryIngredient):
-        pass
+        if isinstance (primaryIngredient, (Herb, Catalyst)) and isinstance(secondaryIngredient, (Catalyst, Potion)):
+            if type == "SuperPotion" and isinstance(primaryIngredient, Herb) and isinstance(secondaryIngredient, Catalyst):
+                mixed_potion = SuperPotion(name, stat, primaryIngredient, secondaryIngredient)
+            elif type == "ExtremePotion" and isinstance(primaryIngredient, Catalyst) and isinstance(secondaryIngredient, Potion):
+                mixed_potion = SuperPotion(name, stat, primaryIngredient, secondaryIngredient)
+
+            mixed_potion.setBoost(mixed_potion.calculateBoost())
+
+            self.__potions.append(mixed_potion)
+            print(f"{mixed_potion.getName()} was invented on mixing and was successfully added to the Laboratory")
+        else:
+            print(f"An error encountered while mixing!")
 
     def addReagent(self, reagent, amount):
         for _ in range(amount):
@@ -19,6 +30,9 @@ class Laboratory:
     
     def getCatalysts(self):
         return self.__catalysts
+    
+    def getPotions(self):
+        return self.__potions
 
 class Potion:
     def __init__(self, name, stat, boost):
@@ -64,7 +78,7 @@ class ExtremePotion(Potion):
         self.__potion = potion
 
     def calculateBoost(self):
-        boost_calculation = ((self.__reagent.getPotency() * (self.__catalyst.getBoost()) * 3.0))
+        boost_calculation = ((self.getReagent().getPotency() * (self.__catalyst.getBoost()) * 3.0))
         return round(boost_calculation, 2)
 
     def getReagent(self):
@@ -106,7 +120,7 @@ class Herb(Reagent):
         return self.__grimy
     
     def setGrimy(self, grimy):
-        self.__grmiy = grimy
+        self.__grimy = grimy
 
 class Catalyst(Reagent):
     def __init__(self, name, potency, quality):
