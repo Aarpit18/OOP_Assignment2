@@ -8,8 +8,8 @@ class Laboratory:
         if isinstance (primaryIngredient, (Herb, Catalyst)) and isinstance(secondaryIngredient, (Catalyst, Potion)):
             if type == "SuperPotion" and isinstance(primaryIngredient, Herb) and isinstance(secondaryIngredient, Catalyst):
                 mixed_potion = SuperPotion(name, stat, primaryIngredient, secondaryIngredient)
-            elif type == "ExtremePotion" and isinstance(primaryIngredient, Catalyst) and isinstance(secondaryIngredient, Potion):
-                mixed_potion = SuperPotion(name, stat, primaryIngredient, secondaryIngredient)
+            elif type == "ExtremePotion" and (isinstance(primaryIngredient, Herb) or isinstance(primaryIngredient, Catalyst)) and isinstance(secondaryIngredient, Potion):
+                mixed_potion = ExtremePotion(name, stat, primaryIngredient, secondaryIngredient)
 
             mixed_potion.setBoost(mixed_potion.calculateBoost())
 
@@ -111,7 +111,7 @@ class Herb(Reagent):
 
     def refine(self):
         if self.__grimy == True:
-            print(f"Refining {self.__name}")
+            print(f"Refining Herb: {self.__name}")
             self.setPotency(self.getPotency()*2.5)
             self.__grimy = False
             print(f"{self.getName()} is no longer grimy and Potency is multiplied by 2.5.")
@@ -129,11 +129,11 @@ class Catalyst(Reagent):
 
     def refine(self):
         if self.__quality < 8.9:
-            print(f"Refining {self.__name}")
+            print(f"Refining Catalyst: {self.__name}")
             self.__quality += 1.0
             print(f"Quality increased to {self.__quality} ")
         elif self.__quality >= 8.9:
-            print(f"Refining {self.__name}")
+            print(f"Refining Catalyst: {self.__name}")
             self.__quality = 10
             print(f"Quality set to 10. It cannot be refined further.")
 
@@ -144,7 +144,7 @@ class Alchemist:
     def __init__(self):
         self.__attack = 0
         self.__strength = 0
-        self.__denfense = 0
+        self.__defense = 0
         self.__magic = 0
         self.__range = 0
         self.__necromancy = 0
@@ -158,10 +158,16 @@ class Alchemist:
         return self.__recipes
     
     def mixPotion(self, recipe):
-        pass
+        self.__laboratory.mixPotion(recipe.getName(), recipe.getType(), recipe.getStat(), recipe.getPrimaryIngredient(), recipe.getSecondaryIngredient())
 
     def drinkPotion(self, potion):
-        pass
+        potion_stats = Potion.getStat()
+        self.__attack += potion_stats["attack"]
+        self.__strength += potion_stats["strength"]
+        self.__defense += potion_stats["defense"]
+        self.__magic += potion_stats["magic"]
+        self.__range += potion_stats["range"]
+        self.__necromancy += potion_stats["necromancy"]
 
     def collectReagent(self, reagent, amount):
         self.__laboratory.addReagent(reagent, amount)
