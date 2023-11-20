@@ -413,7 +413,7 @@ class Alchemist:
         Parameters:
         - recipe(dict): A dictionary containing data about the portion recipe.
         """
-        self.__laboratory.mixPotion[recipe.getName(), recipe.getType(), recipe.getStat(), recipe.getPrimaryIngredient(), recipe.getSecondaryIngredient()]
+        self.__laboratory.mixPotion(recipe.getName(), recipe.getType(), recipe.getStat(), recipe.getPrimaryIngredient(), recipe.getSecondaryIngredient())
 
     def drinkPotion(self, potion):
         """
