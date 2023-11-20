@@ -307,6 +307,7 @@ class Laboratory:
         self.__catalysts = []
 
     def mixPotion(self, name, type, stat, primaryIngredient, secondaryIngredient):
+        mixed_potion = (name, type, stat, primaryIngredient, secondaryIngredient)
         """
         Mixing of a potion in the laboratory.
 
@@ -317,16 +318,18 @@ class Laboratory:
         - primaryIngredient (Herb or Catalyst): The primary ingredient of the potion.
         - secondaryIngredient (Catalyst or Potion): The secondary ingredient of the potion.
         """
-        if isinstance (primaryIngredient, (Herb, Catalyst)) and isinstance(secondaryIngredient, (Catalyst, Potion)):
-            if type == "SuperPotion" and isinstance(primaryIngredient, Herb) and isinstance(secondaryIngredient, Catalyst):
+        if isinstance(primaryIngredient, (Herb, Catalyst)) and isinstance(secondaryIngredient, (Catalyst, Potion)):
+            if type == "SuperPotion" and (isinstance(primaryIngredient, Herb) and isinstance(secondaryIngredient, Catalyst)):
                 mixed_potion = SuperPotion(name, stat, primaryIngredient, secondaryIngredient)
-            elif type == "ExtremePotion" and (isinstance(primaryIngredient, Herb) or isinstance(primaryIngredient, Catalyst)) and isinstance(secondaryIngredient, Potion):
-                mixed_potion = ExtremePotion(name, stat, primaryIngredient, secondaryIngredient)
 
+            elif type == "ExtremePotion" and (isinstance(primaryIngredient, (Herb, Catalyst)) and isinstance(secondaryIngredient, Potion)):
+                mixed_potion = ExtremePotion(name, stat, primaryIngredient, secondaryIngredient)
+        
             mixed_potion.setBoost(mixed_potion.calculateBoost())
 
             self.__potions.append(mixed_potion)
             print(f"{mixed_potion.getName()} was invented on mixing and was successfully added to the Laboratory")
+            
         else:
             print(f"An error encountered while mixing!")
 
