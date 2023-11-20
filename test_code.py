@@ -1,6 +1,6 @@
 """
 File Name: main_code.py
-Description: Assignment 2 main code
+Description: Assignment 2 test code
 Name: Aarpit Mangla
 Student ID: manay087
 email: manay087@mymail.unisa.edu.au
@@ -100,34 +100,23 @@ def testExtremePotionCalculateBoost():
     assert boost_calculation == round((reagent_herb.getPotency() * superpotion_name.getBoost()) * 3.0 , 2)
 
 """
-Python Fixtures
-"""
-
-@pytest.fixture
-def catalyst_name():
-    return Catalyst("Limpwurt Root", 3.6, 1.7)
-
-@pytest.fixture
-def herb_name():
-    return Herb("Kwuarm", 1.2, True)
-
-@pytest.fixture
-def superpotion_name():
-    return SuperPotion("Super Strength", "Strength", 0, herb_name, catalyst_name)
-
-@pytest.fixture
-def extremepotion_name():
-    return ExtremePotion("Extreme Strength", "Strength", 0, herb_name, superpotion_name)
-
-"""
 Testing Fifth Class: Laboratory
 """
 
 def testLaboratoryAddReagent():
     laboratory = Laboratory()
+    herb_name = Herb("Kwuarm", 1.2, True)
     amount = 2
     laboratory.addReagent(herb_name, amount)
     """
     amount 2 also refers to the number of elements in the herbs list
     """
     assert len(laboratory._Laboratory__herbs) == 2
+
+"""
+To run pytest automatically
+"""
+if __name__ == "__main__":
+    pytest.main()
+    
+# Reference: University of South Australia (UniSA) 2023, 7.2 - Testing, University of South Australia, viewed 20 November 2023, <https://lo.unisa.edu.au/mod/resource/view.php?id=3310862>.
