@@ -26,3 +26,29 @@ def testHerbRefining():
     herb_name.refine()
     assert herb_name.getPotency() == 1.0 * 2.5
     assert herb_name.getGrimy() == False
+
+"""
+Testing of Second class: Catalyst
+"""
+
+def testCatalyst():
+    catalyst_name = Catalyst("White Berries", 1.2, 2.0)
+    assert catalyst_name.getName() == "White Berries"
+    assert catalyst_name.getPotency() == 1.2
+    assert catalyst_name.getQuality() == 2.0
+
+def testCatalystRefining():
+    catalyst_name = Catalyst("White Berries", 1.2, 8.6)
+    catalyst_name.refine()
+    """
+    Keeping quality value less than 8.9
+    """
+    assert catalyst_name.getQuality() == 9.7
+
+def testCatalystRefiningTwo():
+    catalyst_name = Catalyst("White Berries", 1.2, 9.0)
+    catalyst_name.refine()
+    """
+    Keeping quality value grater than 8.9
+    """
+    assert catalyst_name.getQuality() == 10
