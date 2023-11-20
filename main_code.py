@@ -14,6 +14,12 @@ class Laboratory:
             elif isinstance (reagent, Catalyst):
                 self.__catalysts.append(reagent)
 
+    def getHerbs(self):
+        return self.__herbs
+    
+    def getCatalysts(self):
+        return self.__catalysts
+
 class Potion:
     def __init__(self, name, stat, boost):
         self.__name = name
@@ -97,7 +103,7 @@ class Herb(Reagent):
             print(f"{self.getName()} is no longer grimy and Potency is multiplied by 2.5.")
 
     def getGrimy(self):
-        return self.__grmiy
+        return self.__grimy
     
     def setGrimy(self, grimy):
         self.__grmiy = grimy
@@ -129,7 +135,7 @@ class Alchemist:
         self.__range = 0
         self.__necromancy = 0
         self.__laboratory = Laboratory()
-        self.__recipes: []
+        self.__recipes = []
 
     def getLaboratory(self):
         return self.__laboratory
@@ -144,7 +150,10 @@ class Alchemist:
         pass
 
     def collectReagent(self, reagent, amount):
-        pass
+        self.__laboratory.addReagent(reagent, amount)
 
     def refineReagent(self):
-        pass
+        for herb in self.__laboratory.getHerbs():
+            herb.refine()
+        for catalyst in self.__laboratory.getCatalysts():
+            catalyst.refine()
