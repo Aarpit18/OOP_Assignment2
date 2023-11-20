@@ -42,6 +42,8 @@ def testCatalystRefining():
     catalyst_name.refine()
     """
     Keeping quality value less than 8.9
+
+    Got value of 9.7 by adding 1.1 in 8.6
     """
     assert catalyst_name.getQuality() == 9.7
 
@@ -50,5 +52,53 @@ def testCatalystRefiningTwo():
     catalyst_name.refine()
     """
     Keeping quality value grater than 8.9
+
+    Got value of 10 following with the condition that 
     """
     assert catalyst_name.getQuality() == 10
+
+"""
+Testing Third Class: SuperPotion
+"""
+
+def testSuperPotion():
+    herb_name = Herb("Kwuarm", 1.2, True)
+    catalyst_name = Catalyst("Limpwurt Root", 3.6, 1.7)
+    superpotion_name = SuperPotion("Super Strength", "Strength", 0, herb_name, catalyst_name)
+    assert superpotion_name.getName() == "Super Strength"
+    assert superpotion_name.getStat() == "Strength"
+    assert superpotion_name.getBoost() == 0.00
+    assert superpotion_name.getHerb() == herb_name
+    assert superpotion_name.getCatalyst() == catalyst_name
+
+def testSuperPotionCalculateBoost():
+    herb_name = Herb("Kwuarm", 1.2, True)
+    catalyst_name = Catalyst("Limpwurt Root", 3.6, 1.7)
+    super_potion_name = SuperPotion("Super Strength", "Strength", 0, herb_name, catalyst_name)
+    boost_calculation = super_potion_name.calculateBoost(herb_name, catalyst_name)
+    assert boost_calculation == round((herb_name.getPotency()) + (catalyst_name.getPotency() * catalyst_name.getQuality()) * 1.5 , 2)
+
+"""
+Testing Third Class: ExtremePotion
+"""
+
+def testExtremePotion():
+    reagent_herb = Herb("Swarf Weed", 2.5, True)
+    superpotion_name = SuperPotion("Super Strength", "Strength", 0, Herb("Kwuarm", 1.2, True), Catalyst("Limpwurt Root", 3.6, 1.7))
+    extremepotion_name = ExtremePotion("Extreme Strength", "Strength", 0, reagent_herb, superpotion_name)
+    assert extremepotion_name.getName() == "Extreme Strength"
+    assert extremepotion_name.getStat() == "Strength"
+    assert extremepotion_name.getBoost() == 0
+    assert extremepotion_name.getReagent() == reagent_herb
+    assert extremepotion_name.getPotion() == superpotion_name
+
+def testExtremePotionCalculateBoost():
+    reagent_herb = Herb("Swarf Weed", 2.5, True)
+    superpotion_name = SuperPotion("Super Strength", "Strength", 0, Herb("Kwuarm", 1.2, True), Catalyst("Limpwurt Root", 3.6, 1.7))
+    extremepotion_name = ExtremePotion("Extreme Strength", "Strength", 0, reagent_herb, superpotion_name)
+    boost_calculation = extremepotion_name.calculateBoost(reagent_herb, superpotion_name)
+    assert boost_calculation == round((reagent_herb.getPotency() * superpotion_name.getBoost()) * 3.0 , 2)
+
+"""
+Testing Fourth Class: 
+"""

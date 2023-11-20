@@ -219,7 +219,7 @@ class SuperPotion(Potion):
         self.__herb = herb
         self.__catalyst = catalyst
 
-    def calculateBoost(self):
+    def calculateBoost(self, herb, catalyst):
         """
         Calculates the boost value of the potion.
 
@@ -266,7 +266,7 @@ class ExtremePotion(Potion):
         self.__reagent = reagent
         self.__potion = potion
     
-    def calculateBoost(self):
+    def calculateBoost(self, reagent, potion):
         """
         Calculates the boost value of the potion.
 
